@@ -1,0 +1,2838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geothermal Power Plant – Powering Bangladesh | 4K Documentary</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #00e5ff;
+            --secondary: #ff7043;
+            --accent: #00e676;
+            --dark: #050a15;
+            --dark-alt: #0a1425;
+            --light: #e0f7fa;
+            --gold: #ffd54f;
+            --purple: #7c4dff;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Cinematic Letterbox */
+        .letterbox-top, .letterbox-bottom {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: #000;
+            z-index: 2000;
+        }
+        
+        .letterbox-top { top: 0; }
+        .letterbox-bottom { bottom: 0; }
+        
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center bottom, #0a1a2a 0%, #000 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1.5s ease;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-content {
+            text-align: center;
+        }
+        
+        .loader-logo {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+        
+        .loader-ring:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border-top-color: var(--accent);
+            animation-duration: 1.5s;
+            animation-direction: reverse;
+        }
+        
+        .loader-ring:nth-child(3) {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            border-top-color: var(--secondary);
+            animation-duration: 1s;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loader-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+        }
+        
+        .loader-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            color: var(--primary);
+            text-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+            letter-spacing: 0.5em;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .loader-subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.3em;
+            animation: fadeInUp 1s ease 0.3s backwards;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .loader-progress-container {
+            width: min(400px, 80vw);
+            margin-top: 3rem;
+        }
+        
+        .loader-progress-bar {
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 1px;
+            overflow: hidden;
+        }
+        
+        .loader-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+        
+        .loader-progress-text {
+            margin-top: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(to bottom, rgba(5, 10, 21, 0.95), transparent);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+        
+        .nav-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+        
+        .nav-controls {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .scene-indicator {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .scene-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .scene-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .scene-dot:hover::after {
+            opacity: 1;
+        }
+        
+        .scene-dot.active {
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+            transform: scale(1.3);
+        }
+        
+        .nav-btn {
+            padding: 0.5rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .nav-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        /* Scene Base */
+        .scene {
+            width: 100%;
+            height: 100vh;
+            min-height: 600px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            scroll-snap-align: start;
+        }
+        
+        .scene-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .scene-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1400px;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .scene-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scene-label {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 2px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .scene-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .scene-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .text-primary { color: var(--primary); }
+        .text-secondary { color: var(--secondary); }
+        .text-accent { color: var(--accent); }
+        .text-gold { color: var(--gold); }
+        
+        /* Background Effects */
+        .bg-stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, white, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 90px 40px, white, transparent),
+                radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 230px 80px, white, transparent);
+            background-size: 250px 200px;
+            animation: twinkle 8s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 229, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: center top;
+            animation: gridFlow 20s linear infinite;
+        }
+        
+        @keyframes gridFlow {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 80px; }
+        }
+        
+        .bg-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.5;
+        }
+        
+        /* Particle System */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite linear;
+            opacity: 0.6;
+        }
+        
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        /* HUD Elements */
+        .hud {
+            position: absolute;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--primary);
+            padding: 0.75rem 1rem;
+            background: rgba(5, 10, 21, 0.8);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 2px;
+            z-index: 20;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s ease;
+        }
+        
+        .hud.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .hud-tl { top: 120px; left: 30px; transition-delay: 0.2s; }
+        .hud-tr { top: 120px; right: 30px; transition-delay: 0.3s; }
+        .hud-bl { bottom: 100px; left: 30px; transition-delay: 0.4s; }
+        .hud-br { bottom: 100px; right: 30px; transition-delay: 0.5s; }
+        
+        .hud-icon {
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        .hud-value {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Scene 1: Energy Crisis */
+        #scene1 .scene-bg {
+            background: 
+                radial-gradient(ellipse at 30% 40%, rgba(255, 100, 50, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 60%, rgba(100, 50, 50, 0.2) 0%, transparent 50%),
+                linear-gradient(to bottom, #050a15, #0a1525);
+        }
+        
+        .earth-3d {
+            width: min(500px, 80vw);
+            height: min(500px, 80vw);
+            position: relative;
+            margin: 2rem auto;
+            perspective: 1000px;
+        }
+        
+        .earth-sphere {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(40, 100, 140, 0.8) 0%, rgba(20, 60, 100, 0.9) 30%, rgba(10, 40, 70, 1) 60%, rgba(5, 20, 40, 1) 100%);
+            box-shadow: 
+                inset -40px -40px 80px rgba(0, 0, 0, 0.8),
+                inset 20px 20px 60px rgba(100, 180, 220, 0.1),
+                0 0 100px rgba(0, 100, 150, 0.4),
+                0 0 200px rgba(0, 50, 100, 0.2);
+            position: relative;
+            animation: earthRotate 120s linear infinite, earthPulse 8s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+        
+        @keyframes earthRotate {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        
+        @keyframes earthPulse {
+            0%, 100% { box-shadow: inset -40px -40px 80px rgba(0,0,0,0.8), 0 0 100px rgba(0,100,150,0.4); }
+            50% { box-shadow: inset -40px -40px 80px rgba(0,0,0,0.8), 0 0 150px rgba(0,150,200,0.5); }
+        }
+        
+        .earth-continents {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .continent {
+            position: absolute;
+            background: rgba(40, 100, 50, 0.6);
+            border-radius: 30% 70% 50% 50%;
+        }
+        
+        .continent:nth-child(1) { top: 20%; left: 15%; width: 30%; height: 40%; background: rgba(30, 90, 40, 0.7); }
+        .continent:nth-child(2) { top: 30%; left: 45%; width: 25%; height: 35%; background: rgba(40, 100, 50, 0.6); }
+        .continent:nth-child(3) { top: 15%; left: 60%; width: 20%; height: 25%; background: rgba(35, 85, 45, 0.7); }
+        
+        .earth-atmosphere {
+            position: absolute;
+            top: -5%;
+            left: -5%;
+            width: 110%;
+            height: 110%;
+            border-radius: 50%;
+            background: radial-gradient(circle, transparent 45%, rgba(100, 180, 255, 0.1) 50%, transparent 55%);
+            pointer-events: none;
+        }
+        
+        .smoke-plumes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .smoke-plume {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(100,100,100,0.7) 0%, rgba(80,80,80,0.4) 30%, transparent 70%);
+            border-radius: 50%;
+            animation: smokePlume 6s ease-out infinite;
+        }
+        
+        @keyframes smokePlume {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-150px) scale(4); opacity: 0; }
+        }
+        
+        .smoke-plume:nth-child(1) { top: 25%; left: 20%; animation-delay: 0s; }
+        .smoke-plume:nth-child(2) { top: 28%; left: 25%; animation-delay: 1s; }
+        .smoke-plume:nth-child(3) { top: 26%; left: 22%; animation-delay: 2s; }
+        .smoke-plume:nth-child(4) { top: 55%; left: 48%; animation-delay: 0.5s; }
+        .smoke-plume:nth-child(5) { top: 58%; left: 52%; animation-delay: 1.5s; }
+        .smoke-plume:nth-child(6) { top: 70%; left: 25%; animation-delay: 1s; }
+        
+        /* Scene 2: Bangladesh */
+        #scene2 .scene-bg {
+            background: 
+                radial-gradient(ellipse at 50% 50%, rgba(0, 229, 255, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #050a15, #0a1a2a);
+        }
+        
+        .bangladesh-container {
+            width: min(600px, 80vw);
+            height: min(500px, 70vh);
+            position: relative;
+            margin: 2rem auto;
+        }
+        
+        .map-svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .map-path {
+            fill: rgba(0, 229, 255, 0.15);
+            stroke: var(--primary);
+            stroke-width: 2;
+            filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.3));
+            transition: all 0.5s ease;
+        }
+        
+        .map-path:hover {
+            fill: rgba(0, 229, 255, 0.25);
+            filter: drop-shadow(0 0 40px rgba(0, 229, 255, 0.5));
+        }
+        
+        .geo-marker {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: geoPulse 2s ease infinite;
+            box-shadow: 0 0 20px var(--accent);
+        }
+        
+        .geo-marker::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 15px;
+            background: var(--accent);
+        }
+        
+        @keyframes geoPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 20px var(--accent); }
+            50% { transform: translate(-50%, -50%) scale(1.5); box-shadow: 0 0 40px var(--accent); }
+        }
+        
+        .plant-illustration {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .plant-buildings {
+            position: relative;
+            width: 200px;
+            height: 250px;
+        }
+        
+        .plant-main {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 150px;
+            background: linear-gradient(135deg, rgba(20, 60, 80, 0.9), rgba(10, 30, 50, 0.9));
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            box-shadow: 
+                0 0 40px rgba(0, 229, 255, 0.3),
+                inset 0 0 30px rgba(0, 229, 255, 0.1);
+        }
+        
+        .plant-tower {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 130px;
+            background: linear-gradient(90deg, #1a3a4a, #2a4a5a);
+            border-radius: 15px 15px 5px 5px;
+        }
+        
+        .plant-tower::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 40px;
+            background: rgba(0, 229, 255, 0.2);
+            border-radius: 50%;
+            animation: steamRise 3s ease infinite;
+        }
+        
+        @keyframes steamRise {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.3; }
+            50% { transform: translateX(-50%) scale(1.5); opacity: 0.1; }
+        }
+        
+        .plant-windows {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .plant-window {
+            width: 25px;
+            height: 25px;
+            background: var(--primary);
+            opacity: 0.6;
+            animation: windowFlicker 4s ease infinite;
+        }
+        
+        @keyframes windowFlicker {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* Scene 3: Earth Cutaway */
+        #scene3 .scene-bg {
+            background: 
+                radial-gradient(ellipse at 50% 100%, rgba(255, 100, 50, 0.15) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 50%, rgba(100, 50, 30, 0.2) 0%, transparent 50%),
+                linear-gradient(to bottom, #050a15, #1a0a05);
+        }
+        
+        .cutaway-visual {
+            width: min(1000px, 90vw);
+            height: min(500px, 60vh);
+            display: flex;
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .earth-layers-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 50% 50% / 0 0 30% 30%;
+        }
+        
+        .earth-layer {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            transition: all 1s ease;
+        }
+        
+        .layer-surface {
+            top: 0;
+            height: 15%;
+            background: linear-gradient(to bottom, #3d6a1a, #2d5016, #1a3a0a);
+            border-radius: 50% 50% 0 0 / 20% 20% 0 0;
+        }
+        
+        .layer-surface::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(60, 130, 60, 0.3) 0%, transparent 30%),
+                radial-gradient(circle at 60% 40%, rgba(50, 110, 50, 0.2) 0%, transparent 25%);
+        }
+        
+        .layer-crust {
+            top: 12%;
+            height: 12%;
+            background: linear-gradient(to bottom, #8b7355, #6b5344, #5a4535);
+        }
+        
+        .layer-mantle {
+            top: 24%;
+            height: 35%;
+            background: linear-gradient(to bottom, #8b4513, #a0522d, #cd5c5c, #b22222);
+        }
+        
+        .layer-mantle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 200, 100, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 60% 60%, rgba(255, 150, 50, 0.15) 0%, transparent 35%);
+        }
+        
+        .layer-core {
+            top: 59%;
+            height: 41%;
+            background: linear-gradient(to bottom, #ff4500, #ff6347, #ffd700);
+            border-radius: 0 0 50% 50% / 0 0 50% 50%;
+        }
+        
+        .layer-core::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 200, 0.3) 0%, transparent 50%);
+            animation: coreGlow 4s ease infinite;
+        }
+        
+        @keyframes coreGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .depth-markers {
+            position: absolute;
+            left: 10px;
+            top: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 20px 0;
+        }
+        
+        .depth-marker {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.6);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .depth-marker::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--primary);
+        }
+        
+        .pipe-system {
+            position: absolute;
+            right: 20%;
+            top: 0;
+            width: 30px;
+            height: 100%;
+        }
+        
+        .pipe-section {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .pipe-surface {
+            top: 15%;
+            height: 12%;
+            background: linear-gradient(90deg, #4a5a6a, #5a6a7a, #4a5a6a);
+        }
+        
+        .pipe-crust {
+            top: 27%;
+            height: 10%;
+            background: linear-gradient(90deg, #6b5344, #7b6354, #6b5344);
+        }
+        
+        .pipe-mantle {
+            top: 37%;
+            height: 25%;
+            background: linear-gradient(90deg, #8b4513, #a0522d, #8b4513);
+        }
+        
+        .pipe-hot {
+            top: 62%;
+            height: 25%;
+            background: linear-gradient(90deg, #ff4500, #ff6347, #ff4500);
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
+        }
+        
+        .water-flow-anim {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 0%;
+            background: linear-gradient(to bottom, 
+                rgba(0, 180, 255, 0.9),
+                rgba(255, 100, 50, 0.9));
+            border-radius: 8px;
+            animation: flowAnimation 6s ease-in-out infinite;
+        }
+        
+        @keyframes flowAnimation {
+            0%, 100% { height: 0%; top: 0; }
+            50% { height: 100%; top: 0; }
+        }
+        
+        .temperature-scale {
+            width: 60px;
+            padding: 1rem;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid var(--secondary);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .temp-bar {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to bottom, 
+                #00e5ff 0%,
+                #00e676 25%,
+                #ffd54f 50%,
+                #ff7043 75%,
+                #ff1744 100%);
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .temp-marker-line {
+            position: absolute;
+            left: -10px;
+            width: calc(100% + 20px);
+            height: 2px;
+            background: white;
+        }
+        
+        .temp-label {
+            position: absolute;
+            right: -50px;
+            top: -6px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+        }
+        
+        /* Scene 4: Heat Exchanger */
+        #scene4 .scene-bg {
+            background: 
+                radial-gradient(ellipse at 30% 50%, rgba(0, 229, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 50%, rgba(255, 112, 67, 0.1) 0%, transparent 40%),
+                linear-gradient(to bottom, #050a15, #0a1525);
+        }
+        
+        .exchanger-system {
+            width: min(1000px, 90vw);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+        
+        .exchanger-unit {
+            width: 280px;
+            height: 350px;
+            background: linear-gradient(135deg, rgba(20, 40, 60, 0.9), rgba(10, 20, 40, 0.9));
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .exchanger-unit.secondary {
+            border-color: var(--secondary);
+        }
+        
+        .exchanger-header {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .exchanger-fluid-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 65%;
+            background: rgba(0, 50, 80, 0.3);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .exchanger-unit.secondary .exchanger-fluid-container {
+            border-color: rgba(255, 112, 67, 0.3);
+        }
+        
+        .fluid-level {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            transition: all 1.5s ease;
+        }
+        
+        .fluid-water {
+            height: 100%;
+            background: linear-gradient(to top, 
+                rgba(0, 100, 180, 0.9),
+                rgba(0, 150, 220, 0.5),
+                rgba(0, 200, 255, 0.2));
+        }
+        
+        .fluid-isopentane {
+            height: 40%;
+            background: linear-gradient(to top, 
+                rgba(255, 80, 50, 0.9),
+                rgba(255, 130, 80, 0.5),
+                rgba(255, 180, 120, 0.2));
+        }
+        
+        .fluid-vapor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to bottom, 
+                rgba(255, 255, 255, 0.3),
+                transparent);
+            animation: vaporWaves 2s ease infinite;
+        }
+        
+        @keyframes vaporWaves {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .boiling-point-badge {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid var(--secondary);
+            border-radius: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            white-space: nowrap;
+        }
+        
+        .chemical-label {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.5);
+            border-radius: 5px;
+        }
+        
+        .heat-transfer-flow {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .heat-arrow {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent), var(--secondary));
+            position: relative;
+            animation: heatFlow 1.5s ease infinite;
+        }
+        
+        .heat-arrow::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: -8px;
+            border: 10px solid transparent;
+            border-left: 15px solid var(--accent);
+        }
+        
+        @keyframes heatFlow {
+            0%, 100% { opacity: 0.3; transform: scaleX(0.8); }
+            50% { opacity: 1; transform: scaleX(1); }
+        }
+        
+        .heat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+        
+        /* Scene 5: Turbine & Generator */
+        #scene5 .scene-bg {
+            background: 
+                radial-gradient(ellipse at 50% 50%, rgba(0, 230, 118, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #050a15, #0a1a15);
+        }
+        
+        .power-generation-system {
+            width: min(1200px, 90vw);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .turbine-assembly {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .turbine-housing {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a2a3a, #0a1520);
+            border: 4px solid var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 
+                0 0 50px rgba(0, 229, 255, 0.3),
+                inset 0 0 30px rgba(0, 229, 255, 0.1);
+            position: relative;
+        }
+        
+        .turbine-rotor {
+            width: 140px;
+            height: 140px;
+            position: relative;
+            animation: turbineSpin 0.3s linear infinite;
+        }
+        
+        @keyframes turbineSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .turbine-blade {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 15px;
+            background: linear-gradient(90deg, var(--primary), #0099aa);
+            transform-origin: left center;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .turbine-blade:nth-child(1) { transform: rotate(0deg) translateX(-50%); }
+        .turbine-blade:nth-child(2) { transform: rotate(60deg) translateX(-50%); }
+        .turbine-blade:nth-child(3) { transform: rotate(120deg) translateX(-50%); }
+        .turbine-blade:nth-child(4) { transform: rotate(180deg) translateX(-50%); }
+        .turbine-blade:nth-child(5) { transform: rotate(240deg) translateX(-50%); }
+        .turbine-blade:nth-child(6) { transform: rotate(300deg) translateX(-50%); }
+        
+        .turbine-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: #0a1520;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+        }
+        
+        .component-label {
+            margin-top: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .component-spec {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .generator-assembly {
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .generator-body {
+            width: 180px;
+            height: 220px;
+            background: linear-gradient(135deg, #1a3a2a, #0a2015);
+            border: 3px solid var(--accent);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 
+                0 0 40px rgba(0, 230, 118, 0.3),
+                inset 0 0 30px rgba(0, 230, 118, 0.1);
+        }
+        
+        .generator-coils {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+        
+        .generator-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid var(--gold);
+            border-radius: 50%;
+        }
+        
+        .generator-ring:nth-child(1) { transform: rotate(0deg); }
+        .generator-ring:nth-child(2) { transform: rotate(60deg); }
+        .generator-ring:nth-child(3) { transform: rotate(120deg); }
+        
+        .power-flow-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            animation: powerPulse 1s ease infinite;
+        }
+        
+        @keyframes powerPulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .power-output-lines {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .power-tower {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .tower-structure {
+            width: 60px;
+            height: 120px;
+            position: relative;
+        }
+        
+        .tower-pole {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to top, #444, #666);
+        }
+        
+        .tower-crossarm {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #555;
+        }
+        
+        .tower-crossarm:nth-child(1) { top: 20%; }
+        .tower-crossarm:nth-child(2) { top: 50%; }
+        .tower-crossarm:nth-child(3) { top: 80%; }
+        
+        .power-glow {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 30px var(--accent);
+            animation: electricGlow 0.5s ease infinite;
+        }
+        
+        @keyframes electricGlow {
+            0%, 100% { opacity: 0.5; box-shadow: 0 0 20px var(--accent); }
+            50% { opacity: 1; box-shadow: 0 0 40px var(--accent), 0 0 60px var(--gold); }
+        }
+        
+        /* Scene 6: Closed Loop */
+        #scene6 .scene-bg {
+            background: 
+                radial-gradient(ellipse at 50% 50%, rgba(0, 230, 118, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #050a15, #0a1520);
+        }
+        
+        .loop-diagram {
+            width: min(900px, 90vw);
+            height: min(450px, 55vh);
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .loop-svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .loop-component-box {
+            fill: rgba(20, 60, 80, 0.8);
+            stroke: var(--primary);
+            stroke-width: 2;
+            rx: 10;
+        }
+        
+        .loop-component-text {
+            fill: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            text-anchor: middle;
+        }
+        
+        .loop-pipe {
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 3;
+            stroke-dasharray: 15, 5;
+        }
+        
+        .loop-arrow {
+            fill: var(--accent);
+        }
+        
+        .cycle-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            background: rgba(0, 230, 118, 0.2);
+            border: 2px solid var(--accent);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .cycle-icon {
+            font-size: 2rem;
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .cycle-text {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+        }
+        
+        .loop-stats {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .loop-stat {
+            padding: 0.75rem 1.5rem;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .loop-stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .loop-stat-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        /* Scene 7: Comparison */
+        #scene7 .scene-bg {
+            background: 
+                radial-gradient(ellipse at 30% 50%, rgba(255, 68, 68, 0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 50%, rgba(0, 230, 118, 0.1) 0%, transparent 40%),
+                linear-gradient(to bottom, #0a0505, #150a0a);
+        }
+        
+        .comparison-container {
+            width: min(1400px, 95vw);
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+        
+        .comparison-card {
+            flex: 1;
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .comparison-card.thermal {
+            background: linear-gradient(135deg, rgba(60, 20, 20, 0.9), rgba(40, 10, 10, 0.9));
+            border: 2px solid #ff4444;
+        }
+        
+        .comparison-card.thermal .comparison-icon {
+            background: radial-gradient(circle, #ff6600, #ff3300);
+            box-shadow: 0 0 40px rgba(255, 102, 0, 0.5);
+        }
+        
+        .comparison-card.geo {
+            background: linear-gradient(135deg, rgba(20, 60, 40, 0.9), rgba(10, 40, 20, 0.9));
+            border: 2px solid var(--accent);
+        }
+        
+        .comparison-card.geo .comparison-icon {
+            background: radial-gradient(circle, var(--accent), #00aa55);
+            box-shadow: 0 0 40px rgba(0, 230, 118, 0.5);
+        }
+        
+        .comparison-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .comparison-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .comparison-card.thermal .comparison-title {
+            color: #ff6666;
+        }
+        
+        .comparison-card.geo .comparison-title {
+            color: var(--accent);
+        }
+        
+        .comparison-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 5px;
+        }
+        
+        .stat-name {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        .stat-val {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+        }
+        
+        .comparison-card.thermal .stat-val {
+            color: #ff4444;
+        }
+        
+        .comparison-card.geo .stat-val {
+            color: var(--accent);
+        }
+        
+        .vs-badge {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-shadow: 0 0 30px var(--primary);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Scene 8: Infographic */
+        #scene8 .scene-bg {
+            background: 
+                radial-gradient(ellipse at 50% 30%, rgba(0, 229, 255, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #050a15, #0a1020);
+        }
+        
+        .infographic-container {
+            width: min(1100px, 90vw);
+            margin: 2rem auto;
+        }
+        
+        .chart-section {
+            background: rgba(10, 30, 50, 0.8);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .bar-chart-display {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 280px;
+            padding: 1rem 0;
+        }
+        
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .chart-bar {
+            width: 80px;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .bar-geo {
+            background: linear-gradient(to top, var(--accent), #00ffaa, #66ffbb);
+            box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+        }
+        
+        .bar-nuclear {
+            background: linear-gradient(to top, var(--purple), #9944ff, #bb77ff);
+            box-shadow: 0 0 20px rgba(124, 77, 255, 0.3);
+        }
+        
+        .bar-thermal {
+            background: linear-gradient(to top, var(--secondary), #ff8866, #ffaa88);
+            box-shadow: 0 0 20px rgba(255, 112, 67, 0.3);
+        }
+        
+        .bar-value-label {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+        
+        .bar-name-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .cost-summary {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        
+        .cost-card {
+            flex: 1;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.4);
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+        
+        .cost-label-text {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 0.5rem;
+        }
+        
+        .cost-value-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .cost-card.highlight .cost-value-text {
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(0, 230, 118, 0.5);
+        }
+        
+        /* Scene 9: Future Grid */
+        #scene9 .scene-bg {
+            background: 
+                radial-gradient(ellipse at 50% 50%, rgba(0, 230, 118, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #050a15, #0a1a2a);
+        }
+        
+        .future-grid-container {
+            width: min(1000px, 90vw);
+            margin: 2rem auto;
+        }
+        
+        .plant-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .future-plant-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, rgba(20, 60, 80, 0.8), rgba(10, 30, 50, 0.8));
+            border: 1px solid var(--primary);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .future-plant-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 229, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .future-plant-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 229, 255, 0.3);
+        }
+        
+        .future-plant-card:hover::before {
+            opacity: 1;
+        }
+        
+        .plant-icon-sphere {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 30% 30%, var(--primary), var(--accent));
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+            animation: plantPulse 3s ease infinite;
+        }
+        
+        @keyframes plantPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
+            50% { transform: scale(1.1); box-shadow: 0 0 40px rgba(0, 229, 255, 0.6); }
+        }
+        
+        .plant-name-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: white;
+        }
+        
+        .plant-capacity-text {
+            font-size: 0.75rem;
+            color: var(--accent);
+        }
+        
+        .total-capacity-badge {
+            margin-top: 2rem;
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, rgba(0, 230, 118, 0.2), rgba(0, 229, 255, 0.2));
+            border: 2px solid var(--accent);
+            border-radius: 30px;
+            display: inline-block;
+        }
+        
+        .total-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(0, 230, 118, 0.5);
+        }
+        
+        .total-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 0.5rem;
+        }
+        
+        /* Final Scene */
+        #scene10 .scene-bg {
+            background: 
+                linear-gradient(to bottom,
+                    #0a0a20 0%,
+                    #1a1a3a 20%,
+                    #3a2a4a 40%,
+                    #6a3a3a 55%,
+                    #c85020 70%,
+                    #ffa020 85%,
+                    #ffcc00 95%,
+                    #ffffff 100%);
+        }
+        
+        .sunrise-scene {
+            width: min(1400px, 95vw);
+            height: min(550px, 65vh);
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        
+        .sun-element {
+            position: absolute;
+            bottom: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #ffee00, #ff8800);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 80px #ffcc00,
+                0 0 150px #ff8800,
+                0 0 250px #ff6600;
+            animation: sunGlow 4s ease infinite;
+        }
+        
+        @keyframes sunGlow {
+            0%, 100% { box-shadow: 0 0 80px #ffcc00, 0 0 150px #ff8800, 0 0 250px #ff6600; }
+            50% { box-shadow: 0 0 100px #ffee00, 0 0 200px #ff9900, 0 0 300px #ff7700; }
+        }
+        
+        .landscape-svg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+        }
+        
+        .final-plant-graphic {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .final-message {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        
+        .final-main-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: white;
+            text-shadow: 
+                0 0 30px rgba(0, 229, 255, 0.8),
+                0 4px 8px rgba(0,0,0,0.5);
+            margin-bottom: 1rem;
+        }
+        
+        .final-tagline {
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            color: var(--accent);
+        }
+        
+        .tagline-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            bottom: 60px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            z-index: 1000;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+        
+        /* Controls */
+        .control-btn {
+            position: fixed;
+            bottom: 80px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: var(--primary);
+        }
+        
+        .control-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary);
+            transition: fill 0.3s ease;
+        }
+        
+        .control-btn:hover svg {
+            fill: var(--dark);
+        }
+        
+        .control-btn.playing {
+            animation: btnPulse 2s ease infinite;
+        }
+        
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.5); }
+            50% { box-shadow: 0 0 0 15px rgba(0, 229, 255, 0); }
+        }
+        
+        #fullscreenBtn { right: 20px; }
+        #audioBtn { left: 20px; }
+        
+        /* Watermark */
+        .watermark {
+            position: fixed;
+            bottom: 65px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.25);
+            letter-spacing: 0.2em;
+            z-index: 1000;
+        }
+        
+        /* Scene Transitions */
+        .scene-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 9998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+        
+        .scene-transition.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .plant-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .comparison-container {
+                flex-direction: column;
+            }
+            
+            .vs-badge {
+                position: relative;
+                transform: none;
+                top: auto;
+                left: auto;
+                margin: 1rem 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .letterbox-top, .letterbox-bottom {
+                height: 40px;
+            }
+            
+            .nav {
+                top: 40px;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .scene-indicator {
+                order: -1;
+            }
+            
+            .hud {
+                font-size: 0.6rem;
+                padding: 0.5rem 0.75rem;
+            }
+            
+            .hud-tl, .hud-tr, .hud-bl, .hud-br {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cinematic Letterbox -->
+    <div class="letterbox-top"></div>
+    <div class="letterbox-bottom"></div>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <div class="loader-ring"></div>
+                <div class="loader-ring"></div>
+                <div class="loader-ring"></div>
+                <div class="loader-icon">🌍</div>
+            </div>
+            <h1 class="loader-title">GEOTHERMAL BD</h1>
+            <p class="loader-subtitle">A DOCUMENTARY EXPERIENCE</p>
+            <div class="loader-progress-container">
+                <div class="loader-progress-bar">
+                    <div class="loader-progress-fill" id="loaderFill"></div>
+                </div>
+                <p class="loader-progress-text"><span id="loaderPercent">0</span>%</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-brand">
+            <div class="nav-logo">🌍</div>
+            <div class="nav-title">GEOTHERMAL POWER BD</div>
+        </div>
+        <div class="nav-controls">
+            <div class="scene-indicator" id="sceneIndicator"></div>
+            <button class="nav-btn" id="prevBtn">◀ PREV</button>
+            <button class="nav-btn" id="nextBtn">NEXT ▶</button>
+        </div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- Control Buttons -->
+    <button class="control-btn" id="audioBtn" title="Toggle Audio">
+        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+    </button>
+    
+    <button class="control-btn" id="fullscreenBtn" title="Toggle Fullscreen">
+        <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+    </button>
+
+    <!-- Watermark -->
+    <div class="watermark">4K UHD • CINEMATIC DOCUMENTARY • NATIONAL GEOGRAPHIC STYLE</div>
+
+    <!-- Scene Transition -->
+    <div class="scene-transition" id="sceneTransition"></div>
+
+    <!-- SCENE 1: Energy Crisis -->
+    <section class="scene" id="scene1">
+        <div class="scene-bg">
+            <div class="bg-stars"></div>
+            <div class="bg-glow" style="width: 400px; height: 400px; background: rgba(255, 100, 50, 0.1); top: 20%; left: 30%;"></div>
+            <div class="bg-glow" style="width: 300px; height: 300px; background: rgba(100, 50, 50, 0.15); top: 40%; right: 20%;"></div>
+        </div>
+        <div class="particles-container" id="particles1"></div>
+        
+        <div class="scene-content">
+            <span class="scene-label">SCENE 1 • GLOBAL CONTEXT</span>
+            <div class="earth-3d">
+                <div class="earth-sphere">
+                    <div class="earth-continents">
+                        <div class="continent"></div>
+                        <div class="continent"></div>
+                        <div class="continent"></div>
+                    </div>
+                    <div class="smoke-plumes">
+                        <div class="smoke-plume"></div>
+                        <div class="smoke-plume"></div>
+                        <div class="smoke-plume"></div>
+                        <div class="smoke-plume"></div>
+                        <div class="smoke-plume"></div>
+                        <div class="smoke-plume"></div>
+                    </div>
+                </div>
+                <div class="earth-atmosphere"></div>
+            </div>
+            <h1 class="scene-title">The Future Needs Clean Energy</h1>
+            <p class="scene-subtitle">Rising global demand • Fossil fuel dependency • Climate crisis</p>
+        </div>
+        
+        <div class="hud hud-tl"><span class="hud-icon">🌍</span>GLOBAL DEMAND</div>
+        <div class="hud hud-tr"><span class="hud-value">+2.5%</span> CO₂ YoY</div>
+        <div class="hud hud-bl">FOSSIL: <span class="hud-value">81%</span></div>
+        <div class="hud hud-br">RENEWABLE: <span class="hud-value">19%</span></div>
+    </section>
+
+    <!-- SCENE 2: Bangladesh Introduction -->
+    <section class="scene" id="scene2">
+        <div class="scene-bg">
+            <div class="bg-grid"></div>
+        </div>
+        
+        <div class="scene-content">
+            <span class="scene-label">SCENE 2 • BANGLADESH</span>
+            <div class="bangladesh-container">
+                <svg class="map-svg" viewBox="0 0 400 500">
+                    <!-- Simplified Bangladesh map outline -->
+                    <path class="map-path" d="M100,50 Q180,30 220,80 Q280,60 320,100 Q340,160 320,240 Q300,320 240,380 Q180,430 100,420 Q40,380 30,280 Q20,180 40,100 Q60,60 100,50 Z"/>
+                    <!-- Rivers -->
+                    <path d="M200,50 Q190,120 200,200 Q210,280 180,350" fill="none" stroke="rgba(0,150,255,0.3)" stroke-width="3"/>
+                    <path d="M150,80 Q160,150 150,230 Q140,310 100,380" fill="none" stroke="rgba(0,150,255,0.3)" stroke-width="2"/>
+                    <!-- Geothermal markers -->
+                    <circle cx="90" cy="130" r="6" fill="#00e676" opacity="0.8"/>
+                    <circle cx="200" cy="200" r="8" fill="#00e5ff"/>
+                    <circle cx="140" cy="320" r="6" fill="#00e676" opacity="0.8"/>
+                    <circle cx="260" cy="280" r="6" fill="#00e676" opacity="0.8"/>
+                    <circle cx="180" cy="380" r="6" fill="#00e676" opacity="0.8"/>
+                </svg>
+                <div class="geo-marker" style="top: 35%; left: 45%;"></div>
+                
+                <div class="plant-illustration">
+                    <div class="plant-buildings">
+                        <div class="plant-main">
+                            <div class="plant-tower"></div>
+                            <div class="plant-windows">
+                                <div class="plant-window"></div>
+                                <div class="plant-window" style="animation-delay: 0.5s;"></div>
+                                <div class="plant-window" style="animation-delay: 1s;"></div>
+                                <div class="plant-window" style="animation-delay: 1.5s;"></div>
+                                <div class="plant-window" style="animation-delay: 2s;"></div>
+                                <div class="plant-window" style="animation-delay: 2.5s;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1 class="scene-title text-accent">Renewable Energy from Earth's Heat</h1>
+            <p class="scene-subtitle">Bangladesh's First Geothermal Power Plant • Thakurgaon District</p>
+        </div>
+        
+        <div class="hud hud-tl"><span class="hud-icon">📍</span>THAKURGAON</div>
+        <div class="hud hud-tr"><span class="hud-value">48°C/km</span> GRADIENT</div>
+        <div class="hud hud-bl"><span class="hud-icon">⚡</span>200 MW</div>
+        <div class="hud hud-br"><span class="hud-icon">🔄</span>28 WELLS</div>
+    </section>
+
+    <!-- SCENE 3: Earth Cutaway -->
+    <section class="scene" id="scene3">
+        <div class="scene-bg"></div>
+        
+        <div class="scene-content">
+            <span class="scene-label">SCENE 3 • GEOTHERMAL PROCESS</span>
+            <div class="cutaway-visual">
+                <div class="earth-layers-container">
+                    <div class="earth-layer layer-surface"></div>
+                    <div class="earth-layer layer-crust"></div>
+                    <div class="earth-layer layer-mantle"></div>
+                    <div class="earth-layer layer-core"></div>
+                    
+                    <div class="depth-markers">
+                        <div class="depth-marker">SURFACE</div>
+                        <div class="depth-marker">CRUST 35km</div>
+                        <div class="depth-marker">MANTLE</div>
+                        <div class="depth-marker">CORE 2900km</div>
+                    </div>
+                </div>
+                
+                <div class="pipe-system">
+                    <div class="pipe-section pipe-surface"></div>
+                    <div class="pipe-section pipe-crust"></div>
+                    <div class="pipe-section pipe-mantle"></div>
+                    <div class="pipe-section pipe-hot"></div>
+                    <div class="water-flow-anim"></div>
+                </div>
+                
+                <div class="temperature-scale">
+                    <div class="temp-bar">
+                        <div class="temp-marker-line" style="bottom: 20%;">
+                            <span class="temp-label text-accent">80°C</span>
+                        </div>
+                        <div class="temp-marker-line" style="bottom: 45%;">
+                            <span class="temp-label text-secondary">120°C</span>
+                        </div>
+                        <div class="temp-marker-line" style="bottom: 70%;">
+                            <span class="temp-label text-gold">200°C</span>
+                        </div>
+                    </div>
+                    <div style="font-size: 0.7rem; text-align: center; color: rgba(255,255,255,0.5);">TEMP</div>
+                </div>
+            </div>
+            <h1 class="scene-title text-secondary">3.5 km Underground</h1>
+            <p class="scene-subtitle">Water absorbs heat from hot rocks at 80–120°C</p>
+        </div>
+        
+        <div class="hud hud-tl"><span class="hud-icon">📏</span>DEPTH: 3.5 km</div>
+        <div class="hud hud-tr"><span class="hud-icon">🌡️</span>TEMP: 80-120°C</div>
+        <div class="hud hud-bl"><span class="hud-icon">💧</span>WATER IN</div>
+        <div class="hud hud-br"><span class="hud-icon">🔥</span>HEAT OUT</div>
+    </section>
+
+    <!-- SCENE 4: Heat Exchanger -->
+    <section class="scene" id="scene4">
+        <div class="scene-bg"></div>
+        
+        <div class="scene-content">
+            <span class="scene-label">SCENE 4 • BINARY CYCLE</span>
+            <div class="exchanger-system">
+                <div class="exchanger-unit">
+                    <div style="position: absolute; top: 60px; left: 50%; transform: translateX(-50%); font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: var(--primary);">GEOTHERMAL FLUID</div>
+                    <div class="exchanger-header text-primary">HOT WATER</div>
+                    <div class="exchanger-fluid-container">
+                        <div class="fluid-level fluid-water">
+                            <div class="fluid-vapor"></div>
+                        </div>
+                    </div>
+                    <div class="boiling-point-badge">🌡️ 80-120°C</div>
+                    <div class="chemical-label text-primary">H₂O</div>
+                </div>
+                
+                <div class="heat-transfer-flow">
+                    <div class="heat-arrow"></div>
+                    <div class="heat-arrow" style="animation-delay: 0.3s;"></div>
+                    <div class="heat-arrow" style="animation-delay: 0.6s;"></div>
+                    <div class="heat-label">HEAT TRANSFER</div>
+                </div>
+                
+                <div class="exchanger-unit secondary">
+                    <div style="position: absolute; top: 60px; left: 50%; transform: translateX(-50%); font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: var(--secondary);">WORKING FLUID</div>
+                    <div class="exchanger-header text-secondary">ISOPENTANE</div>
+                    <div class="exchanger-fluid-container">
+                        <div class="fluid-level fluid-isopentane" id="isopentaneFluid">
+                            <div class="fluid-vapor"></div>
+                        </div>
+                    </div>
+                    <div class="boiling-point-badge">⚠️ BP: 27.8°C</div>
+                    <div class="chemical-label text-secondary">C₅H₁₂</div>
+                </div>
+            </div>
+            <h1 class="scene-title text-secondary">Binary Cycle Heat Exchanger</h1>
+            <p class="scene-subtitle">Isopentane vaporizes at just 27.8°C, creating high-pressure steam</p>
+        </div>
+        
+        <div class="hud hud-tl"><span class="hud-icon">🔄</span>BINARY CYCLE</div>
+        <div class="hud hud-tr"><span class="hud-icon">⚗️</span>C₅H₁₂</div>
+        <div class="hud hud-bl"><span class="hud-icon">💨</span>VAPORIZE</div>
+        <div class="hud hud-br"><span class="hud-icon">🔥</span>27.8°C BP</div>
+    </section>
+
+    <!-- SCENE 5: Turbine & Generator -->
+    <section class="scene" id="scene5">
+        <div class="scene-bg">
+            <div class="bg-grid"></div>
+        </div>
+        
+        <div class="scene-content">
+            <span class="scene-label">SCENE 5 • POWER GENERATION</span>
+            <div class="power-generation-system">
+                <div class="turbine-assembly">
+                    <div class="turbine-housing">
+                        <div class="turbine-rotor">
+                            <div class="turbine-blade"></div>
+                            <div class="turbine-blade"></div>
+                            <div class="turbine-blade"></div>
+                            <div class="turbine-blade"></div>
+                            <div class="turbine-blade"></div>
+                            <div class="turbine-blade"></div>
+                            <div class="turbine-center"></div>
+                        </div>
+                    </div>
+                    <div class="component-label">TURBINE</div>
+                    <div class="component-spec">3000 RPM</div>
+                </div>
+                
+                <div class="power-flow-indicator">⚡</div>
+                
+                <div class="generator-assembly">
+                    <div class="generator-body">
+                        <div class="generator-coils">
+                            <div class="generator-ring"></div>
+                            <div class="generator-ring"></div>
+                            <div class="generator-ring"></div>
+                        </div>
+                    </div>
+                    <div class="component-label text-accent">GENERATOR</div>
+                    <div class="component-spec">200 MW</div>
+                </div>
+            </div>
+            
+            <h1 class="scene-title text-accent">Power Generation</h1>
+            <p class="scene-subtitle">Electricity flows to homes, schools, hospitals, industries & national grid</p>
+            
+            <div class="power-output-lines">
+                <div class="power-tower">
+                    <div class="tower-structure">
+                        <div class="tower-pole"></div>
+                        <div class="tower-crossarm"></div>
+                        <div class="tower-crossarm"></div>
+                        <div class="tower-crossarm"></div>
+                        <div class="power-glow" style="top: 20%;"></div>
+                        <div class="power-glow" style="top: 50%; animation-delay: 0.3s;"></div>
+                        <div class="power-glow" style="top: 80%; animation-delay: 0.6s;"></div>
+                    </div>
+                </div>
+                <div class="power-tower">
+                    <div class="tower-structure">
+                        <div class="tower-pole"></div>
+                        <div class="tower-crossarm"></div>
+                        <div class="tower-crossarm"></div>
+                        <div class="tower-crossarm"></div>
+                        <div class="power-glow" style="top: 20%; animation-delay: 0.2s;"></div>
+                        <div class="power-glow" style="top: 50%; animation-delay: 0.5s;"></div>
+                        <div class="power-glow" style="top: 80%; animation-delay: 0.8s;"></div>
+                    </div>
+                </div>
+                <div class="power-tower">
+                    <div class="tower-structure">
+                        <div class="tower-pole"></div>
+                        <div class="tower-crossarm"></div>
+                        <div class="tower-crossarm"></div>
+                        <div class="tower-crossarm"></div>
+                        <div class="power-glow" style="top: 20%; animation-delay: 0.4s;"></div>
+                        <div class="power-glow" style="top: 50%; animation-delay: 0.7s;"></div>
+                        <div class="power-glow" style="top: 80%; animation-delay: 1s;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hud hud-tl"><span class="hud-icon">⚙️</span>TURBINE</div>
+        <div class="hud hud-tr"><span class="hud-icon">🔌</span>GENERATOR</div>
+        <div class="hud hud-bl"><span class="hud-icon">🏠</span>HOMES</div>
+        <div class="hud hud-br"><span class="hud-icon">🏥</span>HOSPITALS</div>
+    </section>
+
+    <!-- SCENE 6: Closed Loop -->
+    <section class="scene" id="scene6">
+        <div class="scene-bg"></div>
+        
+        <div class="scene-content">
+            <span class="scene-label">SCENE 6 • CLOSED-LOOP SYSTEM</span>
+            <div class="loop-diagram">
+                <svg class="loop-svg" viewBox="0 0 900 450">
+                    <!-- Pipes connecting components -->
+                    <path class="loop-pipe" d="M200,100 Q400,100 500,180"/>
+                    <path class="loop-pipe" d="M600,180 Q700,180 750,280"/>
+                    <path class="loop-pipe" d="M750,350 Q650,400 400,400 Q200,400 200,280"/>
+                    
+                    <!-- Arrows -->
+                    <polygon class="loop-arrow" points="480,170 470,155 495,160"/>
+                    <polygon class="loop-arrow" points="730,270 720,255 745,260"/>
+                    <polygon class="loop-arrow" points="300,390 290,375 315,380" transform="rotate(180 300 385)"/>
+                    
+                    <!-- Heat Exchanger -->
+                    <rect class="loop-component-box" x="100" y="50" width="120" height="80"/>
+                    <text class="loop-component-text" x="160" y="85">HEAT</text>
+                    <text class="loop-component-text" x="160" y="105">EXCHANGER</text>
+                    
+                    <!-- Turbine -->
+                    <rect class="loop-component-box" x="500" y="140" width="120" height="80"/>
+                    <text class="loop-component-text" x="560" y="185">TURBINE</text>
+                    
+                    <!-- Cooling Chamber -->
+                    <rect class="loop-component-box" x="700" y="240" width="120" height="100"/>
+                    <text class="loop-component-text" x="760" y="285">COOLING</text>
+                    <text class="loop-component-text" x="760" y="305">CHAMBER</text>
+                    
+                    <!-- Labels -->
+                    <text x="350" y="80" fill="rgba(255,255,255,0.5)" font-size="12">VAPOR →</text>
+                    <text x="580" y="240" fill="rgba(255,255,255,0.5)" font-size="12">→ CONDENSATE</text>
+                    <text x="280" y="350" fill="rgba(255,255,255,0.5)" font-size="12">← RETURN</text>
+                </svg>
+                
+                <div class="cycle-badge">
+                    <div class="cycle-icon">♻️</div>
+                    <div class="cycle-text">CLOSED LOOP</div>
+                </div>
+                
+                <div class="loop-stats">
+                    <div class="loop-stat">
+                        <div class="loop-stat-value">0</div>
+                        <div class="loop-stat-label">EMISSIONS</div>
+                    </div>
+                    <div class="loop-stat">
+                        <div class="loop-stat-value">100%</div>
+                        <div class="loop-stat-label">RECYCLING</div>
+                    </div>
+                    <div class="loop-stat">
+                        <div class="loop-stat-value">85%</div>
+                        <div class="loop-stat-label">EFFICIENCY</div>
+                    </div>
+                </div>
+            </div>
+            <h1 class="scene-title text-accent">Closed-Loop System</h1>
+            <p class="scene-subtitle">Isopentane condenses, cools, and returns to the Heat Exchanger</p>
+        </div>
+        
+        <div class="hud hud-tl"><span class="hud-icon">♻️</span>CLOSED LOOP</div>
+        <div class="hud hud-tr"><span class="hud-icon">🔄</span>RECIRCULATE</div>
+        <div class="hud hud-bl"><span class="hud-icon">🌡️</span>CONDENSE</div>
+        <div class="hud hud-br"><span class="hud-icon">⚡</span>EFFICIENCY</div>
+    </section>
+
+    <!-- SCENE 7: Comparison -->
+    <section class="scene" id="scene7">
+        <div class="scene-bg"></div>
+        
+        <div class="scene-content">
+            <span class="scene-label">SCENE 7 • COMPARATIVE ANALYSIS</span>
+            <h1 class="scene-title">Power Plant Comparison</h1>
+            
+            <div class="comparison-container">
+                <div class="comparison-card thermal">
+                    <div class="comparison-icon"></div>
+                    <h2 class="comparison-title">COAL PLANT</h2>
+                    <div class="comparison-stats">
+                        <div class="stat-item">
+                            <span class="stat-name">CO₂ Emissions</span>
+                            <span class="stat-val">HIGH</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-name">Fuel Cost</span>
+                            <span class="stat-val">CONTINUOUS</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-name">Air Pollution</span>
+                            <span class="stat-val">SEVERE</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-name">Waste</span>
+                            <span class="stat-val">ASH & SLAG</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-name">Water Usage</span>
+                            <span class="stat-val">MASSIVE</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="vs-badge">VS</div>
+                
+                <div class="comparison-card geo">
+                    <div class="comparison-icon"></div>
+                    <h2 class="comparison-title">GEOTHERMAL</h2>
+                    <div class="comparison-stats">
+                        <div class="stat-item">
+                            <span class="stat-name">CO₂ Emissions</span>
+                            <span class="stat-val">ZERO</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-name">Fuel Cost</span>
+                            <span class="stat-val">FREE</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-name">Air Pollution</span>
+                            <span class="stat-val">NONE</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-name">Waste</span>
+                            <span class="stat-val">NONE</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-name">Water Usage</span>
+                            <span class="stat-val">MINIMAL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="scene-subtitle" style="margin-top: 2rem;">Zero Fuel Combustion • Low Emissions • Sustainable Energy</p>
+        </div>
+        
+        <div class="hud hud-tl"><span class="hud-icon">🔥</span>COAL PLANT</div>
+        <div class="hud hud-tr"><span class="hud-icon">🌿</span>GEOTHERMAL</div>
+        <div class="hud hud-bl"><span class="hud-icon">⚖️</span>COMPARE</div>
+        <div class="hud hud-br"><span class="hud-icon">🌱</span>SUSTAINABLE</div>
+    </section>
+
+    <!-- SCENE 8: Cost Infographic -->
+    <section class="scene" id="scene8">
+        <div class="scene-bg">
+            <div class="bg-grid"></div>
+        </div>
+        
+        <div class="scene-content">
+            <span class="scene-label">SCENE 8 • ECONOMIC ANALYSIS</span>
+            <div class="infographic-container">
+                <div class="chart-section">
+                    <h3 class="chart-title">50-Year Lifecycle Cost Comparison (200 MW Plant)</h3>
+                    <div class="bar-chart-display">
+                        <div class="bar-group">
+                            <div class="chart-bar bar-geo" id="barGeo" style="height: 0;">
+                                <span class="bar-value-label text-accent">~1300 Crore BDT</span>
+                            </div>
+                            <span class="bar-name-label">GEOTHERMAL</span>
+                        </div>
+                        <div class="bar-group">
+                            <div class="chart-bar bar-nuclear" id="barNuclear" style="height: 0;">
+                                <span class="bar-value-label" style="color: #bb77ff;">~4900 Crore BDT</span>
+                            </div>
+                            <span class="bar-name-label">NUCLEAR</span>
+                        </div>
+                        <div class="bar-group">
+                            <div class="chart-bar bar-thermal" id="barThermal" style="height: 0;">
+                                <span class="bar-value-label" style="color: #ffaa88;">~5200 Crore BDT</span>
+                            </div>
+                            <span class="bar-name-label">THERMAL</span>
+                        </div>
+                    </div>
+                    
+                    <div class="cost-summary">
+                        <div class="cost-card highlight">
+                            <div class="cost-label-text">Geothermal Advantage</div>
+                            <div class="cost-value-text">75% CHEAPER</div>
+                        </div>
+                        <div class="cost-card">
+                            <div class="cost-label-text">vs Thermal</div>
+                            <div class="cost-value-text" style="color: var(--secondary);">~3900 Crore BDT Savings</div>
+                        </div>
+                        <div class="cost-card">
+                            <div class="cost-label-text">vs Nuclear</div>
+                            <div class="cost-value-text" style="color: var(--purple);">~3600 Crore BDT Savings</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1 class="scene-title text-accent">Economically Superior</h1>
+            <p class="scene-subtitle">Bangladesh saves thousands of crores with geothermal energy</p>
+        </div>
+        
+        <div class="hud hud-tl"><span class="hud-icon">📊</span>COST ANALYSIS</div>
+        <div class="hud hud-tr"><span class="hud-icon">💰</span>50-YEAR</div>
+        <div class="hud hud-bl"><span class="hud-icon">📉</span>LIFECYCLE</div>
+        <div class="hud hud-br"><span class="hud-icon">💵</span>SAVINGS</div>
+    </section>
+
+    <!-- SCENE 9: Future Potential -->
+    <section class="scene" id="scene9">
+        <div class="scene-bg">
+            <div class="bg-grid"></div>
+        </div>
+        
+        <div class="scene-content">
+            <span class="scene-label">SCENE 9 • FUTURE VISION</span>
+            <h1 class="scene-title text-accent">Bangladesh's Geothermal Potential</h1>
+            <p class="scene-subtitle">Multiple plants powering communities across the nation</p>
+            
+            <div class="future-grid-container">
+                <div class="plant-grid">
+                    <div class="future-plant-card">
+                        <div class="plant-icon-sphere"></div>
+                        <span class="plant-name-text">THAKURGAON</span>
+                        <span class="plant-capacity-text">200 MW</span>
+                    </div>
+                    <div class="future-plant-card">
+                        <div class="plant-icon-sphere" style="animation-delay: 0.5s;"></div>
+                        <span class="plant-name-text">HABIGANJ</span>
+                        <span class="plant-capacity-text">150 MW</span>
+                    </div>
+                    <div class="future-plant-card">
+                        <div class="plant-icon-sphere" style="animation-delay: 1s;"></div>
+                        <span class="plant-name-text">BARAPUKURIA</span>
+                        <span class="plant-capacity-text">180 MW</span>
+                    </div>
+                    <div class="future-plant-card">
+                        <div class="plant-icon-sphere" style="animation-delay: 1.5s;"></div>
+                        <span class="plant-name-text">TITAS</span>
+                        <span class="plant-capacity-text">120 MW</span>
+                    </div>
+                    <div class="future-plant-card">
+                        <div class="plant-icon-sphere" style="animation-delay: 2s;"></div>
+                        <span class="plant-name-text">SHABAJPUR</span>
+                        <span class="plant-capacity-text">140 MW</span>
+                    </div>
+                    <div class="future-plant-card">
+                        <div class="plant-icon-sphere" style="animation-delay: 2.5s;"></div>
+                        <span class="plant-name-text">SINGRA</span>
+                        <span class="plant-capacity-text">100 MW</span>
+                    </div>
+                    <div class="future-plant-card">
+                        <div class="plant-icon-sphere" style="animation-delay: 3s;"></div>
+                        <span class="plant-name-text">SALDANADI</span>
+                        <span class="plant-capacity-text">90 MW</span>
+                    </div>
+                    <div class="future-plant-card">
+                        <div class="plant-icon-sphere" style="animation-delay: 3.5s;"></div>
+                        <span class="plant-name-text">BANGORA</span>
+                        <span class="plant-capacity-text">110 MW</span>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div class="total-capacity-badge">
+                        <div class="total-value">1,090 MW</div>
+                        <div class="total-label">TOTAL PLANNED CAPACITY</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hud hud-tl"><span class="hud-icon">🗺️</span>MAP VIEW</div>
+        <div class="hud hud-tr"><span class="hud-icon">📍</span>8 SITES</div>
+        <div class="hud hud-bl"><span class="hud-icon">⚡</span>TOTAL: 1090 MW</div>
+        <div class="hud hud-br"><span class="hud-icon">🌍</span>BD GEOTHERMAL</div>
+    </section>
+
+    <!-- SCENE 10: Final Sunrise -->
+    <section class="scene" id="scene10">
+        <div class="scene-bg"></div>
+        
+        <div class="scene-content" style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+            <div class="sunrise-scene">
+                <div class="sun-element"></div>
+                
+                <svg class="landscape-svg" viewBox="0 0 1400 200" preserveAspectRatio="none">
+                    <!-- Hills and mountains -->
+                    <path d="M0,200 L0,150 Q100,100 200,130 Q350,80 500,110 Q650,60 800,100 Q950,50 1100,90 Q1250,40 1400,80 L1400,200 Z" fill="#0a2a0a"/>
+                    <path d="M0,200 L0,170 Q150,130 300,160 Q450,100 600,140 Q750,90 900,130 Q1050,80 1200,120 Q1350,70 1400,110 L1400,200 Z" fill="#0d3a0d"/>
+                </svg>
+                
+                <div class="final-plant-graphic">
+                    <svg width="300" height="200" viewBox="0 0 300 200">
+                        <!-- Main building -->
+                        <rect x="50" y="80" width="200" height="100" rx="8" fill="rgba(20,60,80,0.9)" stroke="#00e5ff" stroke-width="2"/>
+                        <!-- Cooling towers -->
+                        <path d="M90,100 L90,30 Q100,10 110,30 L110,100" fill="rgba(30,70,90,0.9)" stroke="#00e5ff" stroke-width="2"/>
+                        <path d="M190,100 L190,40 Q198,20 206,40 L206,100" fill="rgba(30,70,90,0.9)" stroke="#00e5ff" stroke-width="2"/>
+                        <!-- Steam -->
+                        <ellipse cx="100" cy="25" rx="25" ry="12" fill="rgba(255,255,255,0.2)"/>
+                        <ellipse cx="198" cy="35" rx="20" ry="10" fill="rgba(255,255,255,0.2)"/>
+                        <!-- Windows -->
+                        <rect x="70" y="110" width="30" height="25" fill="#00e5ff" opacity="0.5"/>
+                        <rect x="110" y="110" width="30" height="25" fill="#00e5ff" opacity="0.5"/>
+                        <rect x="150" y="110" width="30" height="25" fill="#00e5ff" opacity="0.5"/>
+                        <rect x="190" y="110" width="30" height="25" fill="#00e5ff" opacity="0.5"/>
+                        <!-- Power lines -->
+                        <line x1="250" y1="100" x2="300" y2="60" stroke="#ffd54f" stroke-width="2"/>
+                        <line x1="50" y1="100" x2="0" y2="60" stroke="#ffd54f" stroke-width="2"/>
+                    </svg>
+                </div>
+                
+                <div class="final-message">
+                    <h1 class="final-main-title">Geothermal Power Plant</h1>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; font-size: 1.3rem;">Powering Bangladesh with Earth's Natural Heat</p>
+                    <div class="final-tagline">
+                        <span class="tagline-item">🟢 Clean</span>
+                        <span class="tagline-item">🔄 Renewable</span>
+                        <span class="tagline-item">🌍 Sustainable</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hud hud-tl"><span class="hud-icon">🌅</span>SUNRISE</div>
+        <div class="hud hud-tr"><span class="hud-icon">🌿</span>GREEN FUTURE</div>
+        <div class="hud hud-bl"><span class="hud-icon">⚡</span>CLEAN ENERGY</div>
+        <div class="hud hud-br"><span class="hud-icon">🇧🇩</span>BANGLADESH</div>
+    </section>
+
+    <script>
+        // Scene data
+        const sceneLabels = [
+            'ENERGY CRISIS', 'BANGLADESH', 'GEOTHERMAL PROCESS', 
+            'BINARY CYCLE', 'POWER GENERATION', 'CLOSED LOOP',
+            'COMPARISON', 'ECONOMICS', 'FUTURE VISION', 'CONCLUSION'
+        ];
+
+        // State
+        let currentScene = 1;
+        const totalScenes = 10;
+        let isTransitioning = false;
+        let audioPlaying = false;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simulate loading
+            let progress = 0;
+            const loaderInterval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(loaderInterval);
+                    setTimeout(() => {
+                        document.getElementById('loader').classList.add('hidden');
+                        initDocumentary();
+                    }, 500);
+                }
+                document.getElementById('loaderFill').style.width = progress + '%';
+                document.getElementById('loaderPercent').textContent = Math.floor(progress);
+            }, 200);
+        });
+
+        function initDocumentary() {
+            createSceneIndicators();
+            createParticles();
+            setupEventListeners();
+            updateProgress();
+            observeScenes();
+            animateScene(1);
+            showHudElements(1);
+        }
+
+        function createSceneIndicators() {
+            const container = document.getElementById('sceneIndicator');
+            sceneLabels.forEach((label, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'scene-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('data-label', label);
+                dot.addEventListener('click', () => goToScene(i + 1));
+                container.appendChild(dot);
+            });
+        }
+
+        function createParticles() {
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particle.style.opacity = 0.3 + Math.random() * 0.4;
+                document.getElementById('particles1').appendChild(particle);
+            }
+        }
+
+        function setupEventListeners() {
+            document.getElementById('prevBtn').addEventListener('click', prevScene);
+            document.getElementById('nextBtn').addEventListener('click', nextScene);
+            document.getElementById('fullscreenBtn').addEventListener('click', toggleFullscreen);
+            document.getElementById('audioBtn').addEventListener('click', toggleAudio);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextScene(); }
+                if (e.key === 'ArrowLeft') { e.preventDefault(); prevScene(); }
+                if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+                if (e.key === 'm' || e.key === 'M') toggleAudio();
+            });
+
+            // Scroll navigation
+            let scrollTimeout;
+            window.addEventListener('wheel', (e) => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    if (e.deltaY > 50) nextScene();
+                    else if (e.deltaY < -50) prevScene();
+                }, 50);
+            }, { passive: true });
+        }
+
+        function observeScenes() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                        const sceneNum = parseInt(entry.target.id.replace('scene', ''));
+                        if (sceneNum !== currentScene) {
+                            currentScene = sceneNum;
+                            updateProgress();
+                            updateIndicators();
+                            animateScene(currentScene);
+                            showHudElements(currentScene);
+                            updateNavButtons();
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.scene').forEach(scene => observer.observe(scene));
+        }
+
+        function animateScene(sceneNum) {
+            const scene = document.getElementById('scene' + sceneNum);
+            if (!scene) return;
+
+            const content = scene.querySelector('.scene-content');
+            if (content) {
+                content.classList.remove('visible');
+                setTimeout(() => content.classList.add('visible'), 100);
+            }
+
+            // Scene-specific animations
+            setTimeout(() => {
+                if (sceneNum === 4) {
+                    const fluid = document.getElementById('isopentaneFluid');
+                    if (fluid) fluid.style.height = '85%';
+                }
+                if (sceneNum === 8) {
+                    document.getElementById('barGeo').style.height = '120px';
+                    document.getElementById('barNuclear').style.height = '360px';
+                    document.getElementById('barThermal').style.height = '380px';
+                }
+            }, 800);
+        }
+
+        function showHudElements(sceneNum) {
+            const scene = document.getElementById('scene' + sceneNum);
+            if (!scene) return;
+            
+            scene.querySelectorAll('.hud').forEach(hud => {
+                hud.classList.remove('visible');
+                setTimeout(() => hud.classList.add('visible'), 500);
+            });
+        }
+
+        function goToScene(num) {
+            if (isTransitioning || num < 1 || num > totalScenes) return;
+            
+            isTransitioning = true;
+            const transition = document.getElementById('sceneTransition');
+            transition.classList.add('active');
+
+            setTimeout(() => {
+                const target = document.getElementById('scene' + num);
+                target.scrollIntoView({ behavior: 'smooth' });
+                
+                setTimeout(() => {
+                    transition.classList.remove('active');
+                    isTransitioning = false;
+                    currentScene = num;
+                    updateProgress();
+                    updateIndicators();
+                    animateScene(currentScene);
+                    showHudElements(currentScene);
+                    updateNavButtons();
+                }, 600);
+            }, 600);
+        }
+
+        function nextScene() {
+            if (currentScene < totalScenes) goToScene(currentScene + 1);
+        }
+
+        function prevScene() {
+            if (currentScene > 1) goToScene(currentScene - 1);
+        }
+
+        function updateProgress() {
+            const progress = ((currentScene - 1) / (totalScenes - 1)) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function updateIndicators() {
+            document.querySelectorAll('.scene-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i + 1 === currentScene);
+            });
+        }
+
+        function updateNavButtons() {
+            document.getElementById('prevBtn').disabled = currentScene === 1;
+            document.getElementById('nextBtn').disabled = currentScene === totalScenes;
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log('Fullscreen error:', err);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function toggleAudio() {
+            const btn = document.getElementById('audioBtn');
+            // Note: Add actual audio file for production
+            btn.classList.toggle('playing');
+            audioPlaying = !audioPlaying;
+        }
+
+        // Touch support
+        let touchStartY = 0;
+        document.addEventListener('touchstart', e => {
+            touchStartY = e.touches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', e => {
+            const diff = touchStartY - e.changedTouches[0].screenY;
+            if (Math.abs(diff) > 80) {
+                if (diff > 0) nextScene();
+                else prevScene();
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>
