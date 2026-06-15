@@ -1,0 +1,21 @@
+{
+  "name": "geothermal",
+  "version": "1.0.0",
+  "description": "Geothermal energy visualization project with Vercel Web Analytics",
+  "type": "module",
+  "scripts": {
+    "dev": "npx http-server . -p 3000",
+    "build": "echo 'Static site - no build required'",
+    "preview": "npx http-server . -p 3000"
+  },
+  "keywords": [
+    "geothermal",
+    "energy",
+    "visualization"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^1.1.1"
+  }
+}
